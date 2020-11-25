@@ -1,0 +1,16 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 5rem;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.header__title {
+  h2 {
+    margin: 0 0 0 2rem;
+    color: whitesmoke;
+    font-size: xx-large;
+    font-weight: 900;
+  }
+}
