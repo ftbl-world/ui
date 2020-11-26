@@ -1,4 +1,5 @@
 $flex: flex;
+$league-container-width: 600px;
 
 .liveContainer__header {
   background-color: #26a380;
@@ -39,8 +40,57 @@ $flex: flex;
   align-items: center;
 }
 
+.dateChanger {
+  display: $flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: $league-container-width;
+}
+
+.dateChanger__indicator {
+  display: $flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  color: #222831;
+}
+
+.dateChanger__indicator__backward {
+  cursor: pointer;
+  &:after {
+    content: ' \25C0';
+    font-size: 2rem;
+  }
+}
+
+.dateChanger__indicator__displayDate {
+  margin: 0 2rem;
+  span {
+    font-size: xx-large;
+  }
+}
+
+.dateChanger__indicator__forward {
+  cursor: pointer;
+  &:after {
+    content: ' \25B6';
+    font-size: 2.1875rem;
+  }
+}
+
+.dateChanger__picker {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  input {
+    background-color: #EEEEEE;
+    color: #222831;
+    border-color: #222831;
+  }
+}
+
 .liveContainer__body__leagueContainer {
-  min-width: 600px;
+  min-width: $league-container-width;
   margin: 2rem;
   table {
     width: 100%;

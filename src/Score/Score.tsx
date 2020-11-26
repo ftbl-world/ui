@@ -39,6 +39,18 @@ function Live() {
       <div className="liveContainer__body">
         <div className="liveContainer__body__scores">
           {isError === true && <div className="errorPage"><span>Cannot fetch the data right now.</span></div>}
+          {isError === false &&
+          <div className="dateChanger">
+            <div className="dateChanger__indicator">
+              <div className="dateChanger__indicator__backward"></div>
+              <div className="dateChanger__indicator__displayDate"><span><b>Today</b></span></div>
+              <div className="dateChanger__indicator__forward"></div>
+            </div>
+            <div className="dateChanger__picker">
+              <input id="datepicker" type="date"></input>
+            </div>
+          </div>
+          }
           {isError === false && leagues.map((item: any, index: any) => {
             return (
               <div key={item.leagueID} className="liveContainer__body__leagueContainer">
