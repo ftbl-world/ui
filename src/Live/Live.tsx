@@ -5,21 +5,26 @@ function Live() {
   const [leagues, setState] = useState([]);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    setInterval(() => {
-      fetch("https://api.ftbl.world/", {
-        mode: "cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
+  const updateScore = () => {
+    fetch('https://api.ftbl.world/', {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+      .then((res) => res.json())
+      .catch((error) => {
+        setIsError(true);
       })
-        .then((res) => res.json())
-        .catch(error => {
-          setIsError(true);
-        })
-        .then((result) => {
-          setState(result);
-        });
+      .then((result) => {
+        setState(result);
+      });
+  };
+
+  useEffect(() => {
+    updateScore();
+    setInterval(() => {
+      updateScore();
     }, 15000);
   }, []);
 
