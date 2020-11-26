@@ -19,9 +19,8 @@ function Live() {
         })
         .then((result) => {
           setState(result);
-          console.log(result);
         });
-    }, 1000);
+    }, 15000);
   }, []);
 
   return (
