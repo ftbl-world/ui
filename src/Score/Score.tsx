@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Live.scss";
+import "./Score.scss";
 
 function Live() {
   const [leagues, setState] = useState([]);

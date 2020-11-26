@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../Header/Header";
-import Live from "../Live/Live";
+import Score from "../Score/Score";
 import "./App.scss";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Live />
+      <Score />
     </div>
   );
 }
