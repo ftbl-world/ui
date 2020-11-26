@@ -7,7 +7,7 @@ function Live() {
 
   useEffect(() => {
     setInterval(() => {
-      fetch("http://localhost:3001", {
+      fetch("https://api.ftbl.world/", {
         mode: "cors",
         headers: {
           "Access-Control-Allow-Origin": "*",
