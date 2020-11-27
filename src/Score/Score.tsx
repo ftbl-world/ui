@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import $ from "jquery";
 import "./Score.scss";
 
 function Live() {
@@ -21,11 +22,28 @@ function Live() {
       });
   };
 
+  const updateDate = () => {
+    $(document).ready(function() {
+      let date = new Date();
+  
+      let day: any = date.getDate();
+      let month: any = date.getMonth() + 1;
+      let year = date.getFullYear();
+  
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+  
+      let today = year + "-" + month + "-" + day;       
+      $("#datepicker").attr("value", today);
+    });
+  };
+
   useEffect(() => {
     updateScore();
     setInterval(() => {
       updateScore();
     }, 15000);
+    updateDate();
   }, []);
 
   return (
