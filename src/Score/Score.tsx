@@ -7,7 +7,7 @@ function Live() {
   const [isError, setIsError] = useState(false);
 
   const updateScore = () => {
-    fetch('https://api.ftbl.world/', {
+    fetch('https://floating-crag-91660.herokuapp.com/', {
       mode: 'cors',
       headers: {
         'Access-Control-Allow-Origin': '*',
