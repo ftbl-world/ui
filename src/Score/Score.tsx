@@ -71,7 +71,7 @@ function Live() {
           }
           {isError === false && leagues.map((item: any, index: any) => {
             return (
-              <div key={item.leagueID} className="liveContainer__body__leagueContainer">
+              <div id={item.leagueID} key={item.leagueID} className="liveContainer__body__leagueContainer">
                 <div className="leagueNameContainer"><span className="leagueName">{item.name}</span></div>
                 <table>
                   <tbody>
@@ -82,7 +82,12 @@ function Live() {
                             <div className="liveScore">
                               <span className="state"><b>{match.time.state}</b></span>
                               <span className="homeTeam">{match.homeTeam}</span>
-                              <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.homeScore} - {match.awayScore}&nbsp;&nbsp;&nbsp;</b></span>
+                              {
+                                match.time.state === undefined ?
+                                  <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.time.status.substring(match.time.status.lastIndexOf("(") + 1, match.time.status.lastIndexOf("M") + 1)}&nbsp;&nbsp;&nbsp;</b></span>
+                                  :
+                                  <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.homeScore} - {match.awayScore}&nbsp;&nbsp;&nbsp;</b></span>
+                                }
                               <span className="awayTeam">{match.awayTeam}</span>
                             </div>
                           </td>
@@ -100,7 +105,7 @@ function Live() {
           <nav>
             {isError === false && leagues.map((item: any, index: any) => {
               return (
-                <a key={item.leagueID + "_sideNav"} href={index}>{item.name}</a>
+                <a key={item.leagueID + "_sideNav"} href={"#" + item.leagueID}>{item.name}</a>
               );
             })}
           </nav>

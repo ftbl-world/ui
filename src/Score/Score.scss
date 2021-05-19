@@ -28,8 +28,7 @@ $league-container-width: 600px;
 
 .liveContainer__body {
   display: $flex;
-  flex-direction: row;
-  justify-content: space-around;
+  padding-left: 20rem;
   background-color: #EEEEEE;
   min-height: 100vh;
 }
@@ -142,6 +141,9 @@ $league-container-width: 600px;
 }
 
 .liveContainer__body__leagueNavigator {
+  position: fixed;
+  right: 10rem;
+  
   nav {
     display: $flex;
     flex-direction: column;
