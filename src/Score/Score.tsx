@@ -6,7 +6,7 @@ import "./Score.scss";
 
 function Live() {
   const [leagues, setLeagues] = useState([]);
-  // const [allLeagues, setAllLeagues] = useState([]);
+  const [activeLeague, setActiveLeague] = useState('AllLeagues');
   const [isError, setIsError] = useState(false);
 
   const updateScore = () => {
@@ -43,11 +43,9 @@ function Live() {
     });
   };
 
-  // const handleLeagueSelectorChange = (e: any) => {
-  //   setLeagues(leagues.filter((league: any) => {
-  //     return league.leagueID === e.target.value; 
-  //   }));
-  // };
+  const handleActiveLeagueChange = (e: any) => {
+    setActiveLeague(e.target.value);
+  };
 
   useEffect(() => {
     updateScore();
@@ -70,7 +68,7 @@ function Live() {
           {isError === true && <div className="errorPage"><span>Cannot fetch the data right now.</span></div>}
           {isError === false &&
             <div className="league__selector">
-              <Select id="leagueSelect" defaultValue="AllLeagues">
+              <Select id="leagueSelect" value={activeLeague} onChange={(e: any) => handleActiveLeagueChange(e)}>
                 <MenuItem value="AllLeagues">All Leagues</MenuItem>
                 {isError === false && leagues.map((item: any, index: any) => {
                   return (
@@ -80,7 +78,13 @@ function Live() {
               </Select>
             </div>
           }
-          {isError === false && leagues.map((item: any, index: any) => {
+          {isError === false && leagues.filter((item: any) => {
+            if (activeLeague === "AllLeagues") {
+              return item;
+            } else {
+              return item.leagueID === activeLeague;
+            }
+          }).map((item: any, index: any) => {
             return (
               <div id={item.leagueID} key={item.leagueID} className="liveContainer__body__leagueContainer">
                 <div className="leagueNameContainer"><span className="leagueName">{item.name}</span></div>
