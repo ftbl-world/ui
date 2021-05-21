@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import $ from "jquery";
 import "./Score.scss";
 
 function Live() {
-  const [leagues, setState] = useState([]);
+  const [leagues, setLeagues] = useState([]);
+  // const [allLeagues, setAllLeagues] = useState([]);
   const [isError, setIsError] = useState(false);
 
   const updateScore = () => {
@@ -13,13 +16,15 @@ function Live() {
         'Access-Control-Allow-Origin': '*',
       },
     })
-      .then((res) => res.json())
-      .catch((error) => {
-        setIsError(true);
-      })
-      .then((result) => {
-        setState(result);
-      });
+    .then((res) => res.json())
+    .catch((error) => {
+      setIsError(true);
+    })
+    .then((result) => {
+      setLeagues(result);
+      // const aLeagues = result.map((league: any) => league.leagueID);
+      // setAllLeagues(aLeagues);
+    });
   };
 
   const updateDate = () => {
@@ -37,6 +42,12 @@ function Live() {
       $("#datepicker").attr("value", today);
     });
   };
+
+  // const handleLeagueSelectorChange = (e: any) => {
+  //   setLeagues(leagues.filter((league: any) => {
+  //     return league.leagueID === e.target.value; 
+  //   }));
+  // };
 
   useEffect(() => {
     updateScore();
@@ -58,16 +69,16 @@ function Live() {
         <div className="liveContainer__body__scores">
           {isError === true && <div className="errorPage"><span>Cannot fetch the data right now.</span></div>}
           {isError === false &&
-          <div className="dateChanger">
-            <div className="dateChanger__indicator">
-              <div className="dateChanger__indicator__backward"></div>
-              <div className="dateChanger__indicator__displayDate"><span><b>Today</b></span></div>
-              <div className="dateChanger__indicator__forward"></div>
+            <div className="league__selector">
+              <Select id="leagueSelect" defaultValue="AllLeagues">
+                <MenuItem value="AllLeagues">All Leagues</MenuItem>
+                {isError === false && leagues.map((item: any, index: any) => {
+                  return (
+                    <MenuItem value={item.leagueID} >{item.name}</MenuItem>
+                  )
+                })}
+              </Select>
             </div>
-            <div className="dateChanger__picker">
-              <input id="datepicker" type="date"></input>
-            </div>
-          </div>
           }
           {isError === false && leagues.map((item: any, index: any) => {
             return (
@@ -100,15 +111,6 @@ function Live() {
               </div>
             );
           })}
-        </div>
-        <div className="liveContainer__body__leagueNavigator">
-          <nav>
-            {isError === false && leagues.map((item: any, index: any) => {
-              return (
-                <a key={item.leagueID + "_sideNav"} href={"#" + item.leagueID}>{item.name}</a>
-              );
-            })}
-          </nav>
         </div>
       </div>
     </div>
