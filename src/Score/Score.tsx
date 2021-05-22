@@ -47,6 +47,19 @@ function Live() {
     setActiveLeague(e.target.value);
   };
 
+  const convertTime12to24 = (time12h: string) => {
+    const [time, modifier] = time12h.split(" ");
+    let hours: any = time.split(":")[0];
+    let minutes: any = time.split(":")[1];
+    if (hours === "12") {
+      hours = "00";
+    }
+    if (modifier === "PM") {
+      hours = parseInt(hours, 10) + 12;
+    }
+    return `${hours}:${minutes}`;
+  }
+
   useEffect(() => {
     updateScore();
     setInterval(() => {
@@ -93,18 +106,22 @@ function Live() {
                     {item.matches.length > 0 && item.matches.map((match: any) => {
                       return (
                         <tr key={match.matchID}>
-                          <td>
-                            <div className="liveScore">
-                              <span className="state"><b>{match.time.state}</b></span>
-                              <span className="homeTeam">{match.homeTeam}</span>
-                              {
-                                match.time.state === undefined ?
-                                  <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.time.status.substring(match.time.status.lastIndexOf("(") + 1, match.time.status.lastIndexOf("M") + 1)}&nbsp;&nbsp;&nbsp;</b></span>
-                                  :
-                                  <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.homeScore} - {match.awayScore}&nbsp;&nbsp;&nbsp;</b></span>
+                          <td className="liveScore__homeTeam">
+                            <span className="homeTeam">{match.homeTeam}</span>
+                          </td>
+                          <td className="liveScore">
+                            <div className="liveScoreContainer">
+                              {match.time.state !== undefined && <span className="state"><b>{match.time.state}</b></span>}
+                                {
+                                  match.time.state === undefined ?
+                                    <span className="score"><b>&nbsp;&nbsp;&nbsp;{convertTime12to24(match.time.status.substring(match.time.status.lastIndexOf("(") + 1, match.time.status.lastIndexOf("M") + 1))}&nbsp;&nbsp;&nbsp;</b></span>
+                                    :
+                                    <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.homeScore} - {match.awayScore}&nbsp;&nbsp;&nbsp;</b></span>
                                 }
-                              <span className="awayTeam">{match.awayTeam}</span>
                             </div>
+                          </td>
+                          <td className="liveScore__awayTeam">
+                              <span className="awayTeam">{match.awayTeam}</span>
                           </td>
                         </tr>
                       );
