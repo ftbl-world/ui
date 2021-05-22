@@ -104,9 +104,20 @@ $league-container-width: 70vw;
   min-width: 50px;
 }
 
+// .home__name__logo {
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+// }
+// .away__name__logo {
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+// }
+
 .homeTeam {
-  min-width: 200px;
   text-align: right;
+  margin-right: 0.5rem;
 }
 
 .score {
@@ -114,7 +125,7 @@ $league-container-width: 70vw;
 }
 
 .awayTeam {
-  min-width: 200px;
+  margin-left: 0.5rem;
 }
 
 .MuiSelect-select:focus {

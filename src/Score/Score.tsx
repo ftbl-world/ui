@@ -22,8 +22,6 @@ function Live() {
     })
     .then((result) => {
       setLeagues(result);
-      // const aLeagues = result.map((league: any) => league.leagueID);
-      // setAllLeagues(aLeagues);
     });
   };
 
@@ -45,6 +43,7 @@ function Live() {
 
   const handleActiveLeagueChange = (e: any) => {
     setActiveLeague(e.target.value);
+    localStorage.setItem('ftbl-selected-league', e.target.value);
   };
 
   const convertTime12to24 = (time12h: string) => {
@@ -61,6 +60,8 @@ function Live() {
   }
 
   useEffect(() => {
+    var sSelectedLeague: string = localStorage.getItem('ftbl-selected-league') || 'AllLeagues';
+    setActiveLeague(sSelectedLeague);
     updateScore();
     setInterval(() => {
       updateScore();
@@ -107,7 +108,10 @@ function Live() {
                       return (
                         <tr key={match.matchID}>
                           <td className="liveScore__homeTeam">
-                            <span className="homeTeam">{match.homeTeam}</span>
+                            {/* <div className="home__name__logo"> */}
+                              <span className="homeTeam">{match.homeTeam}</span>
+                              {/* <img src="https://secure.cache.images.core.optasports.com/soccer/teams/75x75/uuid_4grc9qgcvusllap8h5j6gc5h5.png" width="20" height="20" alt=""></img> */}
+                            {/* </div> */}
                           </td>
                           <td className="liveScore">
                             <div className="liveScoreContainer">
@@ -121,7 +125,10 @@ function Live() {
                             </div>
                           </td>
                           <td className="liveScore__awayTeam">
+                            {/* <div className="away__name__logo"> */}
+                              {/* <img src="https://secure.cache.images.core.optasports.com/soccer/teams/75x75/uuid_4grc9qgcvusllap8h5j6gc5h5.png" width="20" height="20" alt=""></img> */}
                               <span className="awayTeam">{match.awayTeam}</span>
+                            {/* </div> */}
                           </td>
                         </tr>
                       );
