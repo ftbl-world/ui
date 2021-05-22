@@ -104,16 +104,16 @@ $league-container-width: 70vw;
   min-width: 50px;
 }
 
-// .home__name__logo {
-//   display: flex;
-//   justify-content: flex-end;
-//   align-items: center;
-// }
-// .away__name__logo {
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-// }
+.home__name__logo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.away__name__logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 .homeTeam {
   text-align: right;
@@ -147,6 +147,10 @@ $league-container-width: 70vw;
 
   table {
     font-size: small;
+  }
+
+  td {
+    padding: 0rem;
   }
 
   .liveContainer__body__leagueContainer td {
