@@ -1,0 +1,76 @@
+.matchDetail {
+
+    &__stats {
+        display: flex;
+        flex-direction: row;
+        margin: 2rem 5rem 2rem 5rem;
+
+        &__homeTeam {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+
+            &__logo {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            &__name {
+                display: flex;
+                justify-content: flex-start;
+            }
+        }
+
+        &__score {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+
+            &__scores {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            &__status {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        &__awayTeam {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+
+            &__logo {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            &__name {
+                display: flex;
+                justify-content: flex-end;
+                text-align: right;
+            }
+        }
+    }
+}
+
+@media all and (min-width:0px) and (max-width: 650px) {
+    .matchDetail {
+
+        &__stats {
+            margin: 1rem 2rem 2rem 1rem;
+
+            &__homeTeam {
+                font-size: small;
+            }
+
+            &__awayTeam {
+                font-size: small;
+            }
+        }
+    }
+}

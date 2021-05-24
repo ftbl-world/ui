@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MatchDetail from "../MatchDetail/MatchDetail";
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import $ from "jquery";
@@ -8,6 +9,8 @@ function Live() {
   const [leagues, setLeagues] = useState([]);
   const [activeLeague, setActiveLeague] = useState('AllLeagues');
   const [isError, setIsError] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);	
+  const [dialogState, setDialogState] = useState({});
 
   const updateScore = () => {
     fetch('https://floating-crag-91660.herokuapp.com/', {
@@ -50,9 +53,16 @@ function Live() {
     const date = new Date(timeString);
     const hours = ('0' + date.getHours()).slice(-2);
     const minutes = ('0' + date.getMinutes()).slice(-2);
-;
     return `${hours}:${minutes}`;
   }
+
+  const handleTableRowClick = (match: any) => {	
+    setDialogOpen(true);	
+    setDialogState(match)	
+  };	
+  const handleMatchDetailDialogClose = (match: any) => {	
+    setDialogOpen(false);	
+  };
 
   useEffect(() => {
     var sSelectedLeague: string = localStorage.getItem('ftbl-selected-league') || 'AllLeagues';
@@ -101,7 +111,7 @@ function Live() {
                   <tbody>
                     {item.matches.length > 0 && item.matches.map((match: any) => {
                       return (
-                        <tr key={match.matchID}>
+                        <tr key={match.matchID} onClick={() => handleTableRowClick(match)}>
                           <td className="liveScore__homeTeam">
                             <div className="home__name__logo">
                               <span className="homeTeam">{match.homeTeam}</span>
@@ -136,6 +146,11 @@ function Live() {
           })}
         </div>
       </div>
+      {isError === false && 	
+        <div>	
+          <MatchDetail dialogOpen={dialogOpen} dialogState={dialogState} handleMatchDetailDialogClose={handleMatchDetailDialogClose}/>	
+        </div>	
+      }
     </div>
   );
 }
