@@ -123,9 +123,9 @@ function Live() {
                               {match.time.state !== "" && <span className="state"><b>{match.time.state}</b></span>}
                                 {
                                   match.time.state === "" ?
-                                    <span className="score"><b>&nbsp;&nbsp;&nbsp;{convertTime(match.time.status)}&nbsp;&nbsp;&nbsp;</b></span>
+                                    <span className="score"><b>{convertTime(match.time.status)}</b></span>
                                     :
-                                    <span className="score"><b>&nbsp;&nbsp;&nbsp;{match.homeScore} - {match.awayScore}&nbsp;&nbsp;&nbsp;</b></span>
+                                    <span className="score"><b>{match.homeScore} - {match.awayScore}</b></span>
                                 }
                             </div>
                           </td>

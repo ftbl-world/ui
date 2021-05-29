@@ -45,9 +45,10 @@ $league-container-width: 70vw;
 }
 
 .liveContainer__body__leagueContainer {
-  min-width: $league-container-width;
+  width: $league-container-width;
   margin: 2rem;
   table {
+    table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0 0.15rem;
     width: 100%;
@@ -55,9 +56,6 @@ $league-container-width: 70vw;
   tr {
     height: 3rem;
     background-color: #FFFFFF;
-  }
-  td {
-    padding: 0rem 1rem;
   }
 }
 
@@ -78,16 +76,17 @@ $league-container-width: 70vw;
 }
 
 .liveScore {
-  white-space: nowrap;
-  width: 1%;
+  width: 10%;
 }
 
 .liveScore__homeTeam {
   text-align: right;
+  width: 45%;
 }
 
 .liveScore__awayTeam {
   text-align: left;
+  width: 45%;
 }
 
 .liveScoreContainer {
@@ -120,10 +119,6 @@ $league-container-width: 70vw;
   margin-right: 0.5rem;
 }
 
-.score {
-  min-width: 68px;
-}
-
 .awayTeam {
   margin-left: 0.5rem;
 }
@@ -149,12 +144,16 @@ $league-container-width: 70vw;
     font-size: small;
   }
 
-  td {
-    padding: 0rem;
+  .liveScore {
+    width: 15%;
   }
-
-  .liveContainer__body__leagueContainer td {
-    padding: 0rem;
+  
+  .liveScore__homeTeam {
+    width: 42.5%;
+  }
+  
+  .liveScore__awayTeam {
+    width: 42.5%;
   }
 
   .live__title{
