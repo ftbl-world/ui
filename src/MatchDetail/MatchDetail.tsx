@@ -1,11 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import "./MatchDetail.scss";
 
 function MatchDetail(props: any) {
+    const [matchDetails, setMatchDetails] = useState({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}});
+    const [isError, setIsError] = useState(true);
+
+    const fetchMatchDetails = () => {
+        fetch(`https://floating-crag-91660.herokuapp.com/details?matchUrl=${props.dialogState.detailsUrl}`, {
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+        })
+        .then((res) => res.json())
+        .catch((error) => {
+            setIsError(true);
+        })
+        .then((result) => {
+            setIsError(false);
+            setMatchDetails(result);
+        });
+    }
+
+    useEffect(() => {
+        if (props.dialogState.detailsUrl) {
+            fetchMatchDetails();
+            setInterval(() => {
+                fetchMatchDetails();
+            }, 15000);
+        }
+    }, [props.dialogOpen, props.dialogState.detailsUrl]);
+    
     return (
         <>
-            <Dialog open={props.dialogOpen} onClose={props.handleMatchDetailDialogClose} fullWidth maxWidth="md">
+            { isError === false && <Dialog open={props.dialogOpen} onClose={props.handleMatchDetailDialogClose} fullWidth maxWidth="md">
                 <div className="matchDetail">
                     <div className="matchDetail__stats">
                         <div className="matchDetail__stats__homeTeam">
@@ -35,11 +65,25 @@ function MatchDetail(props: any) {
                             </div>
                         </div>
                     </div>
-                    <div className="matchDetail__scorers">
-
-                    </div>
+                    {isError === false &&
+                        <div className="matchDetail__scorers">
+                            <div className="matchDetail__scorers__home">
+                                {matchDetails.home.goals && matchDetails.home.goals.map((item: any, index: any) => 
+                                    <span>{item.scorer}   {item.time}'</span>
+                                )}
+                            </div>
+                            <div className="matchDetail__scorers__logo">
+                                <SportsSoccerIcon />
+                            </div>
+                            <div className="matchDetail__scorers__away">
+                                {matchDetails.away.goals && matchDetails.away.goals.map((item: any, index: any) => 
+                                    <span>{item.scorer}   {item.time}'</span>
+                                )}
+                            </div>
+                        </div>
+                    }
                 </div>
-            </Dialog>
+            </Dialog>}
         </>
     );
 }

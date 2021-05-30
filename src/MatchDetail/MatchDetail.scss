@@ -1,9 +1,10 @@
 .matchDetail {
+    margin: 1rem;
 
     &__stats {
         display: flex;
         flex-direction: row;
-        margin: 2rem 5rem 2rem 5rem;
+        margin: 1rem 5rem 1rem 5rem;
 
         &__homeTeam {
             display: flex;
@@ -56,13 +57,37 @@
             }
         }
     }
+
+    &__scorers {
+        display: flex;
+        font-weight: 600;
+
+        &__home {
+            display: flex;
+            flex-direction: column;
+            width: 45%;
+        }
+
+        &__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 10%;
+        }
+
+        &__away {
+            display: flex;
+            flex-direction: column;
+            width: 45%;
+        }
+    }
 }
 
 @media all and (min-width:0px) and (max-width: 650px) {
     .matchDetail {
 
         &__stats {
-            margin: 1rem 2rem 2rem 1rem;
+            margin: 0;
 
             &__homeTeam {
                 font-size: small;
@@ -72,5 +97,13 @@
                 font-size: small;
             }
         }
+
+        &__scorers {
+            font-size: small;
+        }
+    }
+
+    .MuiSvgIcon-root {
+        font-size: 1rem !important;
     }
 }
