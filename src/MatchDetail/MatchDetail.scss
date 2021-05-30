@@ -1,83 +1,91 @@
+$flex: flex;
+$row: row;
+$column: column;
+$flex-start: flex-start;
+$flex-end: flex-end;
+$center: center;
+$small: small;
+
 .matchDetail {
     margin: 1rem;
 
     &__stats {
-        display: flex;
-        flex-direction: row;
+        display: $flex;
+        flex-direction: $row;
         margin: 1rem 5rem 1rem 5rem;
 
         &__homeTeam {
-            display: flex;
-            flex-direction: column;
+            display: $flex;
+            flex-direction: $column;
             width: 40%;
 
             &__logo {
-                display: flex;
-                justify-content: flex-start;
+                display: $flex;
+                justify-content: $flex-start;
             }
 
             &__name {
-                display: flex;
-                justify-content: flex-start;
+                display: $flex;
+                justify-content: $flex-start;
             }
         }
 
         &__score {
-            display: flex;
-            flex-direction: column;
+            display: $flex;
+            flex-direction: $column;
             width: 20%;
 
             &__scores {
-                display: flex;
-                flex-direction: row;
+                display: $flex;
+                flex-direction: $row;
                 justify-content: space-around;
             }
 
             &__status {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
+                display: $flex;
+                flex-direction: $row;
+                justify-content: $center;
             }
         }
 
         &__awayTeam {
-            display: flex;
-            flex-direction: column;
+            display: $flex;
+            flex-direction: $column;
             width: 40%;
 
             &__logo {
-                display: flex;
-                justify-content: flex-end;
+                display: $flex;
+                justify-content: $flex-end;
             }
 
             &__name {
-                display: flex;
-                justify-content: flex-end;
+                display: $flex;
+                justify-content: $flex-end;
                 text-align: right;
             }
         }
     }
 
     &__scorers {
-        display: flex;
+        display: $flex;
         font-weight: 600;
 
         &__home {
-            display: flex;
-            flex-direction: column;
+            display: $flex;
+            flex-direction: $column;
             width: 45%;
         }
 
         &__logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: $flex;
+            justify-content: $center;
+            align-items: $center;
             width: 10%;
         }
 
         &__away {
-            display: flex;
-            flex-direction: column;
+            display: $flex;
+            flex-direction: $column;
             width: 45%;
         }
     }
@@ -90,16 +98,16 @@
             margin: 0;
 
             &__homeTeam {
-                font-size: small;
+                font-size: $small;
             }
 
             &__awayTeam {
-                font-size: small;
+                font-size: $small;
             }
         }
 
         &__scorers {
-            font-size: small;
+            font-size: $small;
         }
     }
 
