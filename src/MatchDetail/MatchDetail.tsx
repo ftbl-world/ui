@@ -5,7 +5,7 @@ import "./MatchDetail.scss";
 
 function MatchDetail(props: any) {
     const [matchDetails, setMatchDetails] = useState({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}});
-    const [isError, setIsError] = useState(true);
+    const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     const fetchMatchDetails = () => {
         fetch(`https://floating-crag-91660.herokuapp.com/details?matchUrl=${props.dialogState.detailsUrl}`, {
@@ -16,10 +16,10 @@ function MatchDetail(props: any) {
         })
         .then((res) => res.json())
         .catch((error) => {
-            setIsError(true);
+            setIsDataLoaded(false);
         })
         .then((result) => {
-            setIsError(false);
+            setIsDataLoaded(true);
             setMatchDetails(result);
         });
     }
@@ -31,7 +31,7 @@ function MatchDetail(props: any) {
                 fetchMatchDetails();
             }, 15000);
             return () => {
-                setMatchDetails({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}});
+                setIsDataLoaded(false);
                 return clearInterval(refreshInterval);
             };
         }
@@ -39,7 +39,7 @@ function MatchDetail(props: any) {
     
     return (
         <>
-            { isError === false && <Dialog open={props.dialogOpen} onClose={props.handleMatchDetailDialogClose} fullWidth maxWidth="md">
+            {<Dialog open={props.dialogOpen} onClose={props.handleMatchDetailDialogClose} fullWidth maxWidth="md">
                 <div className="matchDetail">
                     <div className="matchDetail__stats">
                         <div className="matchDetail__stats__homeTeam">
@@ -69,7 +69,7 @@ function MatchDetail(props: any) {
                             </div>
                         </div>
                     </div>
-                    {isError === false &&
+                    {isDataLoaded === true &&
                         <div className="matchDetail__scorers">
                             <div className="matchDetail__scorers__home">
                                 {matchDetails.home.goals && matchDetails.home.goals.map((item: any, index: any) => 
