@@ -30,7 +30,10 @@ function MatchDetail(props: any) {
             const refreshInterval = setInterval(() => {
                 fetchMatchDetails();
             }, 15000);
-            return () => {clearInterval(refreshInterval)};
+            return () => {
+                setMatchDetails({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}});
+                return clearInterval(refreshInterval);
+            };
         }
     }, [props.dialogOpen, props.dialogState.detailsUrl]);
     
