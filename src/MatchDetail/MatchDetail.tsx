@@ -25,11 +25,12 @@ function MatchDetail(props: any) {
     }
 
     useEffect(() => {
-        if (props.dialogState.detailsUrl) {
+        if (props.dialogOpen) {
             fetchMatchDetails();
-            setInterval(() => {
+            const refreshInterval = setInterval(() => {
                 fetchMatchDetails();
             }, 15000);
+            return () => {clearInterval(refreshInterval)};
         }
     }, [props.dialogOpen, props.dialogState.detailsUrl]);
     
@@ -69,7 +70,7 @@ function MatchDetail(props: any) {
                         <div className="matchDetail__scorers">
                             <div className="matchDetail__scorers__home">
                                 {matchDetails.home.goals && matchDetails.home.goals.map((item: any, index: any) => 
-                                    <span>{item.scorer}   {item.time}'</span>
+                                    <span>{item.scorer} &nbsp;&nbsp;&nbsp; {item.time}' &nbsp;</span>
                                 )}
                             </div>
                             <div className="matchDetail__scorers__logo">
@@ -77,7 +78,7 @@ function MatchDetail(props: any) {
                             </div>
                             <div className="matchDetail__scorers__away">
                                 {matchDetails.away.goals && matchDetails.away.goals.map((item: any, index: any) => 
-                                    <span>{item.scorer}   {item.time}'</span>
+                                    <span>&nbsp; {item.scorer} &nbsp;&nbsp;&nbsp; {item.time}'</span>
                                 )}
                             </div>
                         </div>

@@ -5,6 +5,7 @@ $flex-start: flex-start;
 $flex-end: flex-end;
 $center: center;
 $small: small;
+$xsmall: x-small;
 
 .matchDetail {
     margin: 1rem;
@@ -73,13 +74,13 @@ $small: small;
         &__home {
             display: $flex;
             flex-direction: $column;
+            align-items: $flex-end;
             width: 45%;
         }
 
         &__logo {
             display: $flex;
             justify-content: $center;
-            align-items: $center;
             width: 10%;
         }
 
@@ -107,7 +108,7 @@ $small: small;
         }
 
         &__scorers {
-            font-size: $small;
+            font-size: $xsmall;
         }
     }
 
