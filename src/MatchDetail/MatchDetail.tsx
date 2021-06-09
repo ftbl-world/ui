@@ -4,7 +4,7 @@ import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import "./MatchDetail.scss";
 
 function MatchDetail(props: any) {
-    const [matchDetails, setMatchDetails] = useState({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}});
+    const [matchDetails, setMatchDetails] = useState({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}, charts: {possessionChart:""}});
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     const fetchMatchDetails = () => {
@@ -86,6 +86,8 @@ function MatchDetail(props: any) {
                             </div>
                         </div>
                     }
+                    <div className="matchDetail__charts__possession" dangerouslySetInnerHTML={{__html: matchDetails.charts.possessionChart}}>
+                    </div>
                 </div>
             </Dialog>}
         </>

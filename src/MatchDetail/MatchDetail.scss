@@ -90,6 +90,27 @@ $xsmall: x-small;
             width: 45%;
         }
     }
+
+    &__charts {
+        &__possession {
+            display: flex;
+            svg {
+                margin: auto;
+            }
+            .back {
+                fill: #26a380;
+            }
+            .wedge-blank {
+                fill: white;
+            }
+            .wedge {
+                fill: rgba(0, 0, 0, 0.8);
+            }
+            .cutout {
+                fill: white;
+            }
+        }
+    }
 }
 
 @media all and (min-width:0px) and (max-width: 650px) {
