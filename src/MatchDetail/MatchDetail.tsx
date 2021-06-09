@@ -2,9 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import "./MatchDetail.scss";
+import { MatchDetails, initialMatchDetails } from '../types';
 
 function MatchDetail(props: any) {
-    const [matchDetails, setMatchDetails] = useState({home: {goals:[{scorer:""}]}, away: {goals:[{scorer:""}]}, charts: {possessionChart:""}});
+
+  const getPercentage = (home: string, away: string) => {
+    const h = parseInt(home);
+    const a = parseInt(away);
+    if (a === 0 && h === 0) {
+      return '50%';
+    }
+    return `${100 * (h / (h + a))}%`;
+  };
+
+    const [matchDetails, setMatchDetails] = useState<MatchDetails>(initialMatchDetails);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     const fetchMatchDetails = () => {
@@ -41,7 +52,7 @@ function MatchDetail(props: any) {
         <>
             {<Dialog open={props.dialogOpen} onClose={props.handleMatchDetailDialogClose} fullWidth maxWidth="md">
                 <div className="matchDetail">
-                    <div className="matchDetail__stats">
+                  <div className="matchDetail__stats">
                         <div className="matchDetail__stats__homeTeam">
                             <div className="matchDetail__stats__homeTeam__logo">
                                 <img src={props.dialogState.homeTeamLogoUrl} width="50" height="50" alt=""></img>
@@ -69,7 +80,7 @@ function MatchDetail(props: any) {
                             </div>
                         </div>
                     </div>
-                    {isDataLoaded === true &&
+                    {isDataLoaded === true && <>
                         <div className="matchDetail__scorers">
                             <div className="matchDetail__scorers__home">
                                 {matchDetails.home.goals && matchDetails.home.goals.map((item: any, index: any) => 
@@ -85,9 +96,50 @@ function MatchDetail(props: any) {
                                 )}
                             </div>
                         </div>
-                    }
-                    <div className="matchDetail__charts__possession" dangerouslySetInnerHTML={{__html: matchDetails.charts.possessionChart}}>
+                    <div className="matchDetail__charts">
+                      {matchDetails.charts.possessionChart && <>
+                        <div className="matchDetail__charts__possession">
+                          <span className="chart-title">Possession</span>
+                          <div className="matchDetail__charts__possession__chart">
+                            <span className="datapoint-label">{matchDetails.home.possession}</span>
+                            <div className="matchDetail__charts__possession__chart__svg-container" dangerouslySetInnerHTML={{__html: matchDetails.charts.possessionChart}}></div>
+                            <span className="datapoint-label">{matchDetails.away.possession}</span>
+                          </div>
+                        </div>
+                      <div className="matchDetail__charts__ontarget">
+                      <span className="chart-title">Shots On Target</span>
+                        <div className="matchDetail__charts__datapoints">
+                          <span className="datapoint-label">{matchDetails.home.shots.onTarget}</span>
+                          <span className="datapoint-label">{matchDetails.away.shots.onTarget}</span>
+                        </div>
+                        <div className="background-bar">
+                          <div className="foreground-bar" style={{ width: getPercentage(matchDetails.home.shots.onTarget, matchDetails.away.shots.onTarget) }}></div>
+                        </div>
+                      </div>
+                      <div className="matchDetail__charts__offtarget">
+                        <span className="chart-title">Shots Off Target</span>
+                        <div className="matchDetail__charts__datapoints">
+                          <span className="datapoint-label">{matchDetails.home.shots.offTarget}</span>
+                          <span className="datapoint-label">{matchDetails.away.shots.offTarget}</span>
+                        </div>
+                        <div className="background-bar">
+                          <div className="foreground-bar" style={{ width: getPercentage(matchDetails.home.shots.offTarget, matchDetails.away.shots.offTarget) }}></div>
+                        </div>
+                      </div>
+                      <div className="matchDetail__charts__passes">
+                        <span className="chart-title">Passes</span> 
+                        <div className="matchDetail__charts__datapoints">
+                          <span className="datapoint-label">{matchDetails.home.totalPasses}</span>
+                          <span className="datapoint-label">{matchDetails.away.totalPasses}</span>
+                        </div>
+                        <div className="background-bar">
+                          <div className="foreground-bar" style={{ width: getPercentage(matchDetails.home.totalPasses, matchDetails.away.totalPasses) }}></div>
+                        </div>
+                      </div>
+                    </> }
                     </div>
+                    </>
+            }
                 </div>
             </Dialog>}
         </>

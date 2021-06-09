@@ -4,136 +4,197 @@ $column: column;
 $flex-start: flex-start;
 $flex-end: flex-end;
 $center: center;
+$space-between: space-between;
+$large: large;
 $small: small;
 $xsmall: x-small;
+$primary-color: #26a380;
+$secondary-color: rgba(0, 0, 0, 0.8);
 
 .matchDetail {
-    margin: 1rem;
+  margin: 1rem 1rem 64px 1rem;
+  display: $flex;
+  flex-direction: $column;
 
-    &__stats {
+  &__stats {
+    display: $flex;
+    flex-direction: $row;
+    margin: 1rem 5rem 1rem 5rem;
+
+    &__homeTeam {
+      display: $flex;
+      flex-direction: $column;
+      width: 40%;
+
+      &__logo {
+        display: $flex;
+        justify-content: $flex-start;
+      }
+
+      &__name {
+        display: $flex;
+        justify-content: $flex-start;
+      }
+    }
+
+    &__score {
+      display: $flex;
+      flex-direction: $column;
+      width: 20%;
+
+      &__scores {
         display: $flex;
         flex-direction: $row;
-        margin: 1rem 5rem 1rem 5rem;
+        justify-content: space-around;
+      }
 
-        &__homeTeam {
-            display: $flex;
-            flex-direction: $column;
-            width: 40%;
+      &__status {
+        display: $flex;
+        flex-direction: $row;
+        justify-content: $center;
+      }
+    }
 
-            &__logo {
-                display: $flex;
-                justify-content: $flex-start;
-            }
+    &__awayTeam {
+      display: $flex;
+      flex-direction: $column;
+      width: 40%;
 
-            &__name {
-                display: $flex;
-                justify-content: $flex-start;
-            }
+      &__logo {
+        display: $flex;
+        justify-content: $flex-end;
+      }
+
+      &__name {
+        display: $flex;
+        justify-content: $flex-end;
+        text-align: right;
+      }
+    }
+  }
+
+  &__scorers {
+    display: $flex;
+    font-weight: 600;
+
+    &__home {
+      display: $flex;
+      flex-direction: $column;
+      align-items: $flex-end;
+      width: 45%;
+    }
+
+    &__logo {
+      display: $flex;
+      justify-content: $center;
+      width: 10%;
+    }
+
+    &__away {
+      display: $flex;
+      flex-direction: $column;
+      width: 45%;
+    }
+  }
+
+  &__charts {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+
+    & > div {
+      display: $flex;
+      flex-direction: $column;
+      align-items: $center;
+      margin-top: 24px;
+    }
+
+    .chart-title {
+      font-size: $large;
+      font-weight: bold;
+    }
+
+    .datapoint-label {
+      font-size: $large;
+    }
+
+    @mixin bar($bar-color) {
+      width: 100%;
+      height: 12px;
+      background-color: $bar-color;
+    }
+
+    .background-bar {
+      @include bar($secondary-color);
+    }
+
+    .foreground-bar {
+      @include bar($primary-color);
+    }
+
+    &__datapoints {
+      display: $flex;
+      justify-content: $space-between;
+      width: 100%;
+    }
+
+    &__possession {
+      svg {
+        margin: auto;
+      }
+      .back {
+        fill: $primary-color;
+      }
+      .wedge-blank {
+        fill: white;
+      }
+      .wedge {
+        fill: $secondary-color;
+      }
+      .cutout {
+        fill: white;
+      }
+
+      &__chart {
+        display: $flex;
+        align-items: $center;
+
+        &__svg-container {
+          display: $flex;
+          margin: 0 24px;
         }
 
-        &__score {
-            display: $flex;
-            flex-direction: $column;
-            width: 20%;
+      }
+    }
+  }
+}
 
-            &__scores {
-                display: $flex;
-                flex-direction: $row;
-                justify-content: space-around;
-            }
+@media all and (min-width: 0px) and (max-width: 650px) {
+  .matchDetail {
+    &__stats {
+      margin: 0;
 
-            &__status {
-                display: $flex;
-                flex-direction: $row;
-                justify-content: $center;
-            }
-        }
+      &__homeTeam {
+        font-size: $small;
+      }
 
-        &__awayTeam {
-            display: $flex;
-            flex-direction: $column;
-            width: 40%;
-
-            &__logo {
-                display: $flex;
-                justify-content: $flex-end;
-            }
-
-            &__name {
-                display: $flex;
-                justify-content: $flex-end;
-                text-align: right;
-            }
-        }
+      &__awayTeam {
+        font-size: $small;
+      }
     }
 
     &__scorers {
-        display: $flex;
-        font-weight: 600;
-
-        &__home {
-            display: $flex;
-            flex-direction: $column;
-            align-items: $flex-end;
-            width: 45%;
-        }
-
-        &__logo {
-            display: $flex;
-            justify-content: $center;
-            width: 10%;
-        }
-
-        &__away {
-            display: $flex;
-            flex-direction: $column;
-            width: 45%;
-        }
+      font-size: $xsmall;
     }
 
-    &__charts {
-        &__possession {
-            display: flex;
-            svg {
-                margin: auto;
-            }
-            .back {
-                fill: #26a380;
-            }
-            .wedge-blank {
-                fill: white;
-            }
-            .wedge {
-                fill: rgba(0, 0, 0, 0.8);
-            }
-            .cutout {
-                fill: white;
-            }
-        }
-    }
-}
-
-@media all and (min-width:0px) and (max-width: 650px) {
-    .matchDetail {
-
-        &__stats {
-            margin: 0;
-
-            &__homeTeam {
-                font-size: $small;
-            }
-
-            &__awayTeam {
-                font-size: $small;
-            }
-        }
-
-        &__scorers {
-            font-size: $xsmall;
-        }
+    .chart-title, .datapoint-label {
+      font-size: $small;
     }
 
-    .MuiSvgIcon-root {
-        font-size: 1rem !important;
-    }
+    margin-bottom: 24px;
+  }
+
+  .MuiSvgIcon-root {
+    font-size: 1rem !important;
+  }
 }
