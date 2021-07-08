@@ -19,7 +19,7 @@ function MatchDetail(props: any) {
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     const fetchMatchDetails = () => {
-        fetch(`https://floating-crag-91660.herokuapp.com/details?matchUrl=${props.dialogState.detailsUrl}`, {
+        fetch(`https://floating-crag-91660.herokuapp.com/details?matchUrl=${encodeURIComponent(props.dialogState.detailsUrl)}`, {
             mode: 'cors',
             headers: {
                 'Access-Control-Allow-Origin': '*',
