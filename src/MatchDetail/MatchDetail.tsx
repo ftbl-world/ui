@@ -67,6 +67,12 @@ function MatchDetail(props: any) {
                                 <h2>-</h2>
                                 <h2>{props.dialogState.awayScore}</h2>
                             </div>
+                            {
+                              props.dialogState.homePenaltyScore && props.dialogState.awayPenaltyScore &&
+                                <div className="matchDetail__stats__score__scores">
+                                  ({props.dialogState.homePenaltyScore} - {props.dialogState.awayPenaltyScore})
+                                </div>
+                            }
                             <div className="matchDetail__stats__score__status">
                                 {props.dialogState.time && <span>{props.dialogState.time.state}</span>}
                             </div>

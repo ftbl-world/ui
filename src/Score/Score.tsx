@@ -127,6 +127,7 @@ function Live() {
                                     :
                                     <span className="score"><b>{match.homeScore} - {match.awayScore}</b></span>
                                 }
+                              { match.homePenaltyScore && match.awayPenaltyScore && <span className="score">({match.homePenaltyScore} - {match.awayPenaltyScore})</span> }
                             </div>
                           </td>
                           <td className="liveScore__awayTeam">
